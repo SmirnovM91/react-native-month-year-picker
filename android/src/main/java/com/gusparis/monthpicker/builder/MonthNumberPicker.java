@@ -19,7 +19,7 @@ class MonthNumberPicker extends MonthYearNumberPicker {
 
     monthPicker.setMinValue(0);
     monthPicker.setMaxValue(11);
-    monthPicker.setFormatter(MonthFormatter.getMonthFormatter(props.mode(), dfs, props().locale()));
+    monthPicker.setFormatter(MonthFormatter.getMonthFormatter(props.mode(), dfs, props.locale()));
     monthPicker.setWrapSelectorWheel(false);
     monthPicker.setValue(props.value().getMonth());
     // Fix for Formatter blank initial rendering
