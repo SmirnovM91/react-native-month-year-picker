@@ -1,5 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, Animated } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import moment from 'moment';
 import invariant from 'invariant';
 
@@ -15,6 +21,10 @@ import {
 const { width } = Dimensions.get('screen');
 const { Value, timing } = Animated;
 
+const AnimatedTouchableWithoutFeedback = Animated.createAnimatedComponent(
+  TouchableWithoutFeedback,
+);
+
 const styles = StyleSheet.create({
   container: {
     width,
@@ -27,6 +37,10 @@ const styles = StyleSheet.create({
     width,
   },
   picker: { flex: 1 },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
 });
 
 const MonthPicker = ({
@@ -97,40 +111,45 @@ const MonthPicker = ({
   }, [selectedDate]);
 
   return (
-    <Animated.View
-      style={{
-        ...styles.container,
-        opacity,
-        transform: [
-          {
-            translateY: opacity.interpolate({
-              inputRange: [0.4, 1],
-              outputRange: [150, 0],
-            }),
-          },
-        ],
-      }}>
-      <View style={styles.pickerContainer}>
-        <RNMonthPickerView
-          {...{
-            locale,
-            mode,
-            onChange,
-            onDone,
-            onCancel,
-            onNeutral,
-            okButton,
-            cancelButton,
-            neutralButton,
-            autoTheme,
-          }}
-          style={styles.picker}
-          value={value.getTime()}
-          minimumDate={minimumDate?.getTime() ?? null}
-          maximumDate={maximumDate?.getTime() ?? null}
-        />
-      </View>
-    </Animated.View>
+    <>
+      <Animated.View
+        style={{
+          ...styles.container,
+          opacity,
+          transform: [
+            {
+              translateY: opacity.interpolate({
+                inputRange: [0.4, 1],
+                outputRange: [150, 0],
+              }),
+            },
+          ],
+        }}>
+        <View style={styles.pickerContainer}>
+          <RNMonthPickerView
+            {...{
+              locale,
+              mode,
+              onChange,
+              onDone,
+              onCancel,
+              onNeutral,
+              okButton,
+              cancelButton,
+              neutralButton,
+              autoTheme,
+            }}
+            style={styles.picker}
+            value={value.getTime()}
+            minimumDate={minimumDate?.getTime() ?? null}
+            maximumDate={maximumDate?.getTime() ?? null}
+          />
+        </View>
+      </Animated.View>
+      <AnimatedTouchableWithoutFeedback style={{ opacity }} onPress={onCancel}>
+        <View style={styles.overlay} />
+      </AnimatedTouchableWithoutFeedback>
+    </>
   );
 };
 
