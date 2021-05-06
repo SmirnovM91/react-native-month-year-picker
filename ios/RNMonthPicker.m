@@ -32,7 +32,7 @@ NSInteger selectedYearRow;
         self.delegate = self;
         gregorian = [NSCalendar currentCalendar];
         df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"MMMM"];
+        [df setDateFormat:@"LLLL"];
         _value = nil;
         _minimumDate = nil;
         _maximumDate = nil;
