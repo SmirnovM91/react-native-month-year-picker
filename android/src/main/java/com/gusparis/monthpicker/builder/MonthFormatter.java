@@ -33,7 +33,7 @@ public class MonthFormatter {
             SimpleDateFormat monthDisplay = new SimpleDateFormat("LLLL", locale);
             SimpleDateFormat monthParse = new SimpleDateFormat("MM", locale);
             for (int i = 0; i < 12; i++) {
-                String month = String.valueOf(i);
+                String month = String.valueOf(i+1);
                 _months[i] = monthDisplay.format(monthParse.parse(month,new ParsePosition(0)));
             }
             months = _months;
