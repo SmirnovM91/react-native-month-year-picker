@@ -29,7 +29,7 @@ const App = () => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
-  const showPicker = useCallback((value) => setShow(value), []);
+  const showPicker = useCallback(value => setShow(value), []);
 
   const onValueChange = useCallback(
     (event, newDate) => {
@@ -52,8 +52,7 @@ const App = () => {
         <MonthPicker
           onChange={onValueChange}
           value={date}
-          minimumDate={new Date()}
-          maximumDate={new Date(2022, 5)}
+          maximumDate={new Date()}
           locale="en"
           mode="full"
           autoTheme={false}

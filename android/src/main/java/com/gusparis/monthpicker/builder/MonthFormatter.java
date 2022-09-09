@@ -1,6 +1,5 @@
 package com.gusparis.monthpicker.builder;
 
-import android.annotation.SuppressLint;
 import android.widget.NumberPicker;
 
 import java.text.DateFormatSymbols;
